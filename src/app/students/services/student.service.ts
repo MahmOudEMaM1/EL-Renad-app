@@ -7,7 +7,7 @@ import { Student } from '../models/student';
   providedIn: 'root'
 })
 export class StudentService {
-  private apiUrl = 'http://elrenadtravels.runasp.net/api/students';
+  private apiUrl = 'https://elrenadtravels.runasp.net/api/students';
 
   constructor(private http: HttpClient) { }
 
