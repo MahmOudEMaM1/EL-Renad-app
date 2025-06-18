@@ -1,0 +1,12 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    span:last-of-type {
+        margin-right: 16px;
+    }
+}

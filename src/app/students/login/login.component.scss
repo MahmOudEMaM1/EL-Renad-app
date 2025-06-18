@@ -1,0 +1,42 @@
+/* students/login/login.component.scss and students/register/register.component.scss */
+
+.login-container,
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+mat-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.error-message {
+    color: #f44336;
+    margin-bottom: 15px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button[type="submit"] {
+    position: relative;
+    height: 36px;
+}
+
+mat-spinner {
+    margin: 0 auto;
+}
