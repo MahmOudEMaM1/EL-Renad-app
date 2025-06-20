@@ -7,7 +7,12 @@ export interface LoginRequest {
   export interface RegisterRequest {
     name: string;
     password: string;
-    academicYear: number;
+    age: number;
+    gender: string;
+    email: string;
+    fatherName: string;
+    phoneNumber1: string;
+    phoneNumber2: string; // Optional
   }
   
   export interface AuthResponse {

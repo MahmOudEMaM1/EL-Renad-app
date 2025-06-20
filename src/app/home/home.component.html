@@ -1,40 +1,46 @@
 <!-- home/home.component.html -->
-<mat-toolbar color="primary">
-    <span>El-Renad Travel Portal</span>
-    <span class="spacer"></span>
-    <span *ngIf="currentUser">Welcome, {{ currentUser.name }}</span>
-    <button mat-button (click)="logout()">Logout</button>
-</mat-toolbar>
 
-<div class="container">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Hello, {{ currentUser?.name }}!</mat-card-title>
-            <mat-card-subtitle>Welcome to El-Renad Travel</mat-card-subtitle>
-        </mat-card-header>
+<body>
+    <mat-toolbar color="primary">
+        <div class="logo-title-container">
+            <img src="../assets/image2.png" alt="El-Renad Logo" class="navbar-logo">
+            <span>El-Renad Travels</span>
+        </div>
+        <span class="spacer"></span>
+        <span *ngIf="currentUser">Welcome, {{ currentUser.name }}</span>
+        <button mat-button (click)="logout()">Logout</button>
+    </mat-toolbar>
 
-        <mat-card-content>
-            <div class="trip-options">
-                <div class="option-row">
-                    <h3>Trip Place</h3>
-                    <app-trip-place></app-trip-place>
+    <div class="container">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Hello, {{ currentUser?.name }}!</mat-card-title>
+                <mat-card-subtitle>Welcome to El-Renad Travel</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="trip-options">
+                    <div class="option-row">
+                        <h3>Trip Place</h3>
+                        <app-trip-place></app-trip-place>
+                    </div>
+
+                    <div class="option-row">
+                        <h3>Trip Price</h3>
+                        <app-trip-price></app-trip-price>
+                    </div>
+
+                    <div class="option-row">
+                        <h3>Trip Time</h3>
+                        <app-trip-time></app-trip-time>
+                    </div>
+
+                    <div class="option-row">
+                        <h3>Trip Type</h3>
+                        <app-trips></app-trips>
+                    </div>
                 </div>
-
-                <div class="option-row">
-                    <h3>Trip Price</h3>
-                    <app-trip-price></app-trip-price>
-                </div>
-
-                <div class="option-row">
-                    <h3>Trip Time</h3>
-                    <app-trip-time></app-trip-time>
-                </div>
-
-                <div class="option-row">
-                    <h3>Trip Type</h3>
-                    <app-trips></app-trips>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</body>

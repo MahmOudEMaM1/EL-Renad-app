@@ -29,6 +29,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   loading = false;
   error = '';
+  image2Path = '../assets/image2.png'; 
 
   constructor(
     private formBuilder: FormBuilder,

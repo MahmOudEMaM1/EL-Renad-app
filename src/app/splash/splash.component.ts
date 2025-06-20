@@ -12,8 +12,7 @@ export class SplashComponent implements OnInit {
   @Output() splashComplete = new EventEmitter<boolean>();
   
   // Define image paths
-  image1Path = 'assets/image1.jpeg';
-  image2Path = 'assets/image2.jpeg';
+  image2Path = 'assets/image2.png';
 
   ngOnInit(): void {
     setTimeout(() => {

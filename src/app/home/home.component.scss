@@ -4,6 +4,10 @@
     flex: 1 1 auto;
 }
 
+body {
+    background: linear-gradient(135deg, #f5bd2f, #ffffff, #000000);
+}
+
 .container {
     max-width: 800px;
     margin: 30px auto;
@@ -26,4 +30,20 @@
 h3 {
     margin-bottom: 5px;
     color: #3f51b5;
+}
+
+.logo-title-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-logo {
+    height: 40px;
+    width: auto;
+    border-radius: 50%;
+}
+
+.spacer {
+    flex: 1 1 auto;
 }

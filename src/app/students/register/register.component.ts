@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../services/auth.service';
-
+import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -20,7 +20,8 @@ import { AuthService } from '../services/auth.service';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
@@ -29,6 +30,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   loading = false;
   error = '';
+  image2Path = '../assets/image2.png';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,7 +40,12 @@ export class RegisterComponent {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
       password: ['', Validators.required],
-      academicYear: ['', Validators.required]
+      age: ['', [Validators.required, Validators.min(5), Validators.max(100)]],
+      gender: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      fatherName: ['', Validators.required],
+      phoneNumber1: ['', [Validators.required, Validators.pattern("^[0-9]{10,12}$")]],
+      phoneNumber2: ['', Validators.pattern("^[0-9]{10,12}$")]
     });
   }
 

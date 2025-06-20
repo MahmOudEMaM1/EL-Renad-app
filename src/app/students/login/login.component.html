@@ -2,8 +2,13 @@
 <div class="login-container">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
+            <div class="logo-container">
+                <img [src]="image2Path" alt="El-Renad Logo" class="logo">
+            </div>
         </mat-card-header>
+        <div class="title-container">
+            <mat-card-title>Login</mat-card-title>
+        </div>
         <mat-card-content>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="fill">
