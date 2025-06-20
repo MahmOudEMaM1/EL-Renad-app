@@ -1,3 +1,3 @@
 <!-- app.component.html -->
 <app-splash *ngIf="showSplash" (splashComplete)="onSplashComplete()"></app-splash>
-<app-student-list *ngIf="!showSplash"></app-student-list>
+<router-outlet *ngIf="!showSplash"></router-outlet>

@@ -1,0 +1,6 @@
+<select>
+    <option value="">Select a trip place</option>
+    <option *ngFor="let tripPlace of tripPlaces" [value]="tripPlace.id">
+      {{ tripPlace.name }}
+    </option>
+  </select>

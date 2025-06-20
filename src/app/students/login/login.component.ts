@@ -45,14 +45,12 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       return;
     }
-
     this.loading = true;
     this.error = '';
-
     this.authService.login(this.loginForm.value)
       .subscribe({
         next: () => {
-          this.router.navigate(['/students']);
+          this.router.navigate(['/home']); // Changed from '/students' to '/home'
         },
         error: error => {
           this.error = error.error || 'Login failed. Please try again.';

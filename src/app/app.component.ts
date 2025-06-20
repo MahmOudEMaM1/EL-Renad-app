@@ -26,7 +26,7 @@ export class AppComponent {
     
     // Navigate based on authentication status
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['/students']);
+      this.router.navigate(['/home']); // Changed from '/students' to '/home'
     }
   }
 }

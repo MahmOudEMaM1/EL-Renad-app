@@ -1,0 +1,29 @@
+/* home/home.component.scss */
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.trip-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.option-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h3 {
+    margin-bottom: 5px;
+    color: #3f51b5;
+}

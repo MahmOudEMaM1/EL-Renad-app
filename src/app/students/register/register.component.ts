@@ -46,14 +46,12 @@ export class RegisterComponent {
     if (this.registerForm.invalid) {
       return;
     }
-
     this.loading = true;
     this.error = '';
-
     this.authService.register(this.registerForm.value)
       .subscribe({
         next: () => {
-          this.router.navigate(['/students']);
+          this.router.navigate(['/home']); // Changed from '/students' to '/home'
         },
         error: error => {
           this.error = error.error || 'Registration failed. Please try again.';
