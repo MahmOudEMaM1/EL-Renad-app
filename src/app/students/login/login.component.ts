@@ -1,4 +1,3 @@
-// students/login/login.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -51,7 +50,7 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value)
       .subscribe({
         next: () => {
-          this.router.navigate(['/home']); // Changed from '/students' to '/home'
+          this.loading = false; // No navigation here, handled by service
         },
         error: error => {
           this.error = error.error || 'Login failed. Please try again.';

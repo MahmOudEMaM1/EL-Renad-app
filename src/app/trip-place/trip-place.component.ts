@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TripPlaceService } from './service/trip-place.service';
 import { Trip_place } from './models/trip-place.model';
 import { CommonModule, NgFor } from '@angular/common';
@@ -10,10 +10,11 @@ import { CommonModule, NgFor } from '@angular/common';
   styleUrl: './trip-place.component.scss'
 })
 export class TripPlaceComponent implements OnInit {
-  tripPlaces: Trip_place[] = []; // Add this property
-
+  tripPlaces: Trip_place[] = [];
+  @Output() tripPlaceSelected = new EventEmitter<number>();
+  
   constructor(private tripPlaceService: TripPlaceService) {}
-
+  
   ngOnInit() {
     this.tripPlaceService.getTripPlace().subscribe({
       next: (data) => {
@@ -23,5 +24,13 @@ export class TripPlaceComponent implements OnInit {
         console.error('Error fetching trip places:', err);
       }
     });
+  }
+  
+  onSelect(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const tripPlaceId = Number(select.value);
+    if (tripPlaceId) {
+      this.tripPlaceSelected.emit(tripPlaceId);
+    }
   }
 }

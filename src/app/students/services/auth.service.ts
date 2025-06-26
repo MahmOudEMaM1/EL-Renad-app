@@ -1,8 +1,9 @@
-// students/services/auth.service.ts
+// services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoginRequest, RegisterRequest, AuthResponse } from '../models/auth.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<AuthResponse | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     // Load user from localStorage on startup
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
@@ -27,6 +28,12 @@ export class AuthService {
           // Store user details and token in local storage
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+          // Navigate based on admin status
+          if (user.admin) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         })
       );
   }
@@ -38,14 +45,20 @@ export class AuthService {
           // Store user details and token in local storage
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+          // Navigate based on admin status
+          if (user.admin) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         })
       );
   }
 
   logout(): void {
-    // Remove user from local storage
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 
   get currentUserValue(): AuthResponse | null {

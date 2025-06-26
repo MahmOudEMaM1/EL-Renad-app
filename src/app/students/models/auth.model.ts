@@ -12,12 +12,18 @@ export interface LoginRequest {
     email: string;
     fatherName: string;
     phoneNumber1: string;
-    phoneNumber2: string; // Optional
+    phoneNumber2: string; 
   }
   
   export interface AuthResponse {
     id: number;
     name: string;
-    academicYear: number;
+    fatherName: string;
+    age: number;
+    gender: string;
+    email: string;
+    phoneNumber1: string; // Changed from number to string
+    phoneNumber2: string; // Changed from number to string
+    admin: boolean;
     token: string;
   }

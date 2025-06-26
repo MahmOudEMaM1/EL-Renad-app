@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TripTimeComponent } from './trip-time.component';
+import { TripTimeReturnComponent } from './trip-time-return.component';
 
-describe('TripTimeComponent', () => {
-  let component: TripTimeComponent;
-  let fixture: ComponentFixture<TripTimeComponent>;
+describe('TripTimeReturnComponent', () => {
+  let component: TripTimeReturnComponent;
+  let fixture: ComponentFixture<TripTimeReturnComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TripTimeComponent]
+      imports: [TripTimeReturnComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TripTimeComponent);
+    fixture = TestBed.createComponent(TripTimeReturnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
-<select>
-    <option value="">Select a trip place</option>
+<select (change)="onSelect($event)">
+      <option value="">Select a trip place</option>
     <option *ngFor="let ticketPrice of ticketPrice " [value]="ticketPrice.id">
       {{ ticketPrice.price }}
     </option>

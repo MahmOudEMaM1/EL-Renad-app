@@ -4,7 +4,7 @@
     <mat-toolbar color="primary">
         <div class="logo-title-container">
             <img src="../assets/image2.png" alt="El-Renad Logo" class="navbar-logo">
-            <span>El-Renad Travels</span>
+            <span>El-Renad Travel Portal</span>
         </div>
         <span class="spacer"></span>
         <span *ngIf="currentUser">Welcome, {{ currentUser.name }}</span>
@@ -22,22 +22,33 @@
                 <div class="trip-options">
                     <div class="option-row">
                         <h3>Trip Place</h3>
-                        <app-trip-place></app-trip-place>
+                        <app-trip-place (tripPlaceSelected)="onTripPlaceSelected($event)"></app-trip-place>
                     </div>
 
                     <div class="option-row">
                         <h3>Trip Price</h3>
-                        <app-trip-price></app-trip-price>
+                        <app-trip-price (ticketPriceSelected)="onTicketPriceSelected($event)"></app-trip-price>
                     </div>
 
                     <div class="option-row">
-                        <h3>Trip Time</h3>
-                        <app-trip-time></app-trip-time>
+                        <h3>Outbound Trip Time</h3>
+                        <app-trip-time (tripTimeOutSelected)="onOutboundTimeSelected($event)"></app-trip-time>
+                    </div>
+
+                    <div class="option-row">
+                        <h3>Return Trip Time</h3>
+                        <app-trip-time-return (tripTimeReturnSelected)="onReturnTimeSelected($event)"></app-trip-time-return>
                     </div>
 
                     <div class="option-row">
                         <h3>Trip Type</h3>
-                        <app-trips></app-trips>
+                        <app-trips (tripTypeSelected)="onTripTypeSelected($event)"></app-trips>
+                    </div>
+
+                    <div class="register-button-container">
+                        <button mat-raised-button color="primary" (click)="registerTrip()">
+              Register Trip
+            </button>
                     </div>
                 </div>
             </mat-card-content>
