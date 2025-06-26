@@ -23,12 +23,13 @@ mat-card-title {
 
 body {
     background: linear-gradient(135deg, #f5bd2f, #ffffff, #000000);
-    min-height: 140vh;
+    /* Ensure gradient is applied */
+    min-height: 100vh;
+    /* Full viewport height */
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    /* Provides positioning context for absolute elements */
 }
 
 .register-container {
@@ -45,9 +46,17 @@ mat-card {
     padding: 20px;
 }
 
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Single column for better alignment */
+    gap: 15px;
+    /* Space between fields */
+    margin-bottom: 20px;
+}
+
 mat-form-field {
     width: 100%;
-    margin-bottom: 15px;
 }
 
 .button-container {
@@ -59,4 +68,43 @@ mat-form-field {
 .error-message {
     color: #f44336;
     margin: 10px 0;
+}
+
+
+/* Language toggle positioning (top left of the page) */
+
+.language-toggle-container {
+    position: absolute;
+    top: 10px;
+    /* Adjust to match your desired position */
+    right: 10px;
+    /* Top left of the page */
+    z-index: 100;
+    /* Ensure it stays above other content */
+}
+
+
+/* RTL adjustments */
+
+[dir="rtl"] {
+    text-align: right;
+    .mat-toolbar {
+        flex-direction: row-reverse;
+    }
+    .logo-title-container {
+        flex-direction: row-reverse;
+    }
+    .spacer {
+        margin-left: 0;
+        margin-right: auto;
+    }
+    .mat-form-field {
+        text-align: right;
+    }
+    .language-toggle-container {
+        left: auto;
+        /* Reset left for RTL */
+        right: 10px;
+        /* Move to top right in RTL */
+    }
 }

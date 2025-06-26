@@ -1,54 +1,52 @@
-<!-- home/home.component.html -->
-
 <body>
     <mat-toolbar color="primary">
         <div class="logo-title-container">
             <img src="../assets/image2.png" alt="El-Renad Logo" class="navbar-logo">
-            <span>El-Renad Travel Portal</span>
+            <span class="toolbar-title">{{ 'toolbar.title' | translate }}</span>
         </div>
         <span class="spacer"></span>
-        <span *ngIf="currentUser">Welcome, {{ currentUser.name }}</span>
-        <button mat-button (click)="logout()">Logout</button>
+        <app-language-toggle></app-language-toggle>
+        <button mat-button (click)="logout()">{{ 'toolbar.logout' | translate }}</button>
     </mat-toolbar>
 
     <div class="container">
         <mat-card>
             <mat-card-header>
-                <mat-card-title>Hello, {{ currentUser?.name }}!</mat-card-title>
-                <mat-card-subtitle>Welcome to El-Renad Travel</mat-card-subtitle>
+                <mat-card-title>{{ 'home.title' | translate: {name: currentUser?.name} }}</mat-card-title>
+                <mat-card-subtitle>{{ 'home.subtitle' | translate }}</mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
                 <div class="trip-options">
                     <div class="option-row">
-                        <h3>Trip Place</h3>
+                        <h3>{{ 'home.trip_place' | translate }}</h3>
                         <app-trip-place (tripPlaceSelected)="onTripPlaceSelected($event)"></app-trip-place>
                     </div>
 
                     <div class="option-row">
-                        <h3>Trip Price</h3>
+                        <h3>{{ 'home.trip_price' | translate }}</h3>
                         <app-trip-price (ticketPriceSelected)="onTicketPriceSelected($event)"></app-trip-price>
                     </div>
 
                     <div class="option-row">
-                        <h3>Outbound Trip Time</h3>
+                        <h3>{{ 'home.outbound_time' | translate }}</h3>
                         <app-trip-time (tripTimeOutSelected)="onOutboundTimeSelected($event)"></app-trip-time>
                     </div>
 
                     <div class="option-row">
-                        <h3>Return Trip Time</h3>
+                        <h3>{{ 'home.return_time' | translate }}</h3>
                         <app-trip-time-return (tripTimeReturnSelected)="onReturnTimeSelected($event)"></app-trip-time-return>
                     </div>
 
                     <div class="option-row">
-                        <h3>Trip Type</h3>
+                        <h3>{{ 'home.trip_type' | translate }}</h3>
                         <app-trips (tripTypeSelected)="onTripTypeSelected($event)"></app-trips>
                     </div>
 
                     <div class="register-button-container">
                         <button mat-raised-button color="primary" (click)="registerTrip()">
-              Register Trip
-            </button>
+                            {{ 'home.register_button' | translate }}
+                        </button>
                     </div>
                 </div>
             </mat-card-content>

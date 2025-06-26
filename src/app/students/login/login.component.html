@@ -1,41 +1,51 @@
-<!-- students/login/login.component.html -->
 <div class="login-container">
+    <div class="language-toggle-container">
+        <app-language-toggle></app-language-toggle>
+    </div>
     <mat-card>
         <mat-card-header>
             <div class="logo-container">
                 <img [src]="image2Path" alt="El-Renad Logo" class="logo">
             </div>
         </mat-card-header>
+
         <div class="title-container">
-            <mat-card-title>Login</mat-card-title>
+            <!-- Translated title -->
+            <mat-card-title>{{ 'login.title' | translate }}</mat-card-title>
         </div>
+
         <mat-card-content>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="fill">
-                    <mat-label>Username</mat-label>
+                    <!-- Translated labels and errors -->
+                    <mat-label>{{ 'login.username' | translate }}</mat-label>
                     <input matInput formControlName="name" required>
-                    <mat-error *ngIf="loginForm.get('name')?.errors?.['required']">Username is required</mat-error>
+                    <mat-error *ngIf="loginForm.get('name')?.errors?.['required']">
+                        {{ 'login.username_required' | translate }}
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
-                    <mat-label>Password</mat-label>
+                    <mat-label>{{ 'login.password' | translate }}</mat-label>
                     <input matInput type="password" formControlName="password" required>
-                    <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</mat-error>
+                    <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">
+                        {{ 'login.password_required' | translate }}
+                    </mat-error>
                 </mat-form-field>
 
                 <div *ngIf="error" class="error-message">
-                    {{ error }}
+                    <!-- Translate error message -->
+                    {{ error | translate }}
                 </div>
 
                 <div class="button-container">
                     <button mat-raised-button color="primary" type="submit" [disabled]="loading || loginForm.invalid">
-              <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
-              <span *ngIf="!loading">Login</span>
-            </button>
-
+                        <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+                        <span *ngIf="!loading">{{ 'login.button' | translate }}</span>
+                    </button>
                     <button mat-button type="button" color="accent" (click)="goToRegister()">
-              Create Account
-            </button>
+                        {{ 'login.create_account' | translate }}
+                    </button>
                 </div>
             </form>
         </mat-card-content>

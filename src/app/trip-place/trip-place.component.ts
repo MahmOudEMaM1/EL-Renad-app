@@ -2,10 +2,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TripPlaceService } from './service/trip-place.service';
 import { Trip_place } from './models/trip-place.model';
 import { CommonModule, NgFor } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-trip-place',
-  imports: [NgFor, CommonModule],
+  standalone: true,
+  imports: [NgFor, CommonModule, TranslateModule],
   templateUrl: './trip-place.component.html',
   styleUrl: './trip-place.component.scss'
 })

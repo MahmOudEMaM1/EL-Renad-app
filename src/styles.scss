@@ -1,4 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global responsive adjustments */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Media queries for smaller screens */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px 10px !important;
+        margin: 15px auto !important;
+    }
+    mat-toolbar {
+        padding: 0 10px !important;
+        height: auto !important;
+        min-height: 56px !important;
+        flex-wrap: wrap !important;
+    }
+    .mat-form-field {
+        width: 100% !important;
+    }
+}

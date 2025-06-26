@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../services/auth.service';
+import { LanguageToggleComponent } from '../../language-toggle/language-toggle.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core'; // Add TranslateService
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,9 @@ import { AuthService } from '../services/auth.service';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    LanguageToggleComponent,
+    TranslateModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -33,6 +37,7 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private translate: TranslateService,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
@@ -41,23 +46,26 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void {
-    if (this.loginForm.invalid) {
-      return;
-    }
-    this.loading = true;
-    this.error = '';
-    this.authService.login(this.loginForm.value)
-      .subscribe({
-        next: () => {
-          this.loading = false; // No navigation here, handled by service
-        },
-        error: error => {
-          this.error = error.error || 'Login failed. Please try again.';
-          this.loading = false;
-        }
-      });
+  // login.component.ts
+onSubmit(): void {
+  if (this.loginForm.invalid) {
+    return;
   }
+  this.loading = true;
+  this.error = '';
+  
+  this.authService.login(this.loginForm.value)
+    .subscribe({
+      next: () => {
+        this.loading = false;
+      },
+      error: error => {
+        // Use translation key instead of hardcoded error
+        this.error = error.error || 'login.error';
+        this.loading = false;
+      }
+    });
+}
 
   goToRegister(): void {
     this.router.navigate(['/register']);
