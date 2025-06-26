@@ -40,7 +40,7 @@
 
                     <div class="option-row">
                         <h3>{{ 'home.trip_price' | translate }}</h3>
-                        <app-trip-price (ticketPriceSelected)="onTicketPriceSelected($event)"></app-trip-price>
+                        <app-trip-price (ticketPriceSelected)="onTicketPriceSelected($event)" [isPriceDisabled]="isPriceDisabled" [selectedTicketPrice]="selectedTicketPrice"></app-trip-price>
                     </div>
 
                     <div class="register-button-container">

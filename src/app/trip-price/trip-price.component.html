@@ -1,6 +1,38 @@
-<select (change)="onSelect($event)">
-  <option value="">{{ 'trip_price.select' | translate }}</option>
-  <option *ngFor="let ticketPrice of ticketPrice" [value]="ticketPrice.id">
-    {{ ticketPrice.price }}
+<select (change)="onSelect($event)" [disabled]="isPriceDisabled" [(ngModel)]="selectedTicketPrice" class="custom-select">
+  <option value="" disabled>{{ 'trip_price.select' | translate }}</option>
+  <option *ngFor="let price of ticketPrice" [value]="price.id" [selected]="price.id === selectedTicketPrice" class="option-item">
+   {{ price.price }}
   </option>
 </select>
+<style>
+    .custom-select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        appearance: none;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4H2z" fill="%23333"/></svg>') no-repeat left 10px center;
+        direction: rtl;
+        /* Ensure RTL for Arabic text */
+        text-align: center;
+        /* Align text to the right */
+    }
+    
+    .custom-select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    
+    .option-item {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .option-item[selected] {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+</style>

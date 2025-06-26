@@ -1,5 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Ticket_Price } from './models/trip-price.model';
 import { TicketServiceService } from './service/trip-sevice.service';
 import { FormsModule } from '@angular/forms';
@@ -15,9 +15,11 @@ import { TranslateModule } from '@ngx-translate/core';
 export class TripPriceComponent implements OnInit {
   ticketPrice: Ticket_Price[] = [];
   @Output() ticketPriceSelected = new EventEmitter<number>();
-  
+  @Input() isPriceDisabled: boolean = false;
+  @Input() selectedTicketPrice: number | null = null;
+
   constructor(private ticketPriceService: TicketServiceService) {}
-  
+
   ngOnInit() {
     this.ticketPriceService.getTicketPrice().subscribe({
       next: (data) => {
