@@ -47,6 +47,8 @@ export class HomeComponent implements OnInit {
   selectedReturnTime: number | null = null;
   selectedTicketPrice: number | null = null;
   isPriceDisabled: boolean = false;
+  isOutboundTimeDisabled: boolean = true;
+  isReturnTimeDisabled: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -73,14 +75,26 @@ export class HomeComponent implements OnInit {
     if (tripTypeId === 1) { // "ذهاب و إياب"
       this.selectedTicketPrice = 1; // Default price id for 50
       this.isPriceDisabled = true;
-      this.onTicketPriceSelected(1); // Emit the selected price
-    } else if (tripTypeId === 2 || tripTypeId === 3) { // "ذهاب" or "إياب"
+      this.onTicketPriceSelected(1);
+      this.isOutboundTimeDisabled = false;
+      this.isReturnTimeDisabled = false;
+    } else if (tripTypeId === 3) { // "ذهاب"
       this.selectedTicketPrice = 2; // Special price id for 25
       this.isPriceDisabled = true;
-      this.onTicketPriceSelected(2); // Emit the selected price
+      this.onTicketPriceSelected(2);
+      this.isOutboundTimeDisabled = false;
+      this.isReturnTimeDisabled = true;
+    } else if (tripTypeId === 2) { // "إياب"
+      this.selectedTicketPrice = 2; // Special price id for 25
+      this.isPriceDisabled = true;
+      this.onTicketPriceSelected(2);
+      this.isOutboundTimeDisabled = true;
+      this.isReturnTimeDisabled = false;
     } else {
       this.selectedTicketPrice = null;
       this.isPriceDisabled = false;
+      this.isOutboundTimeDisabled = true;
+      this.isReturnTimeDisabled = true;
     }
   }
 

@@ -1,9 +1,9 @@
-<select (change)="onSelect($event)" class="custom-select">
-  <option value="">{{ 'trip_outbound_time.select' | translate }}</option>
-  <option *ngFor="let time of tripTimesOuts" [value]="time.id" class="option-item">
-    {{ time.timeRange }}
-  </option>
-</select>
+<select (change)="onSelect($event)" [disabled]="isDisabled" class="custom-select">
+    <option value="">{{ 'trip_outbound_time.select' | translate }}</option>
+    <option *ngFor="let time of tripTimesOuts" [value]="time.id" class="option-item">
+      {{ time.timeRange }}
+    </option>
+  </select>
 <style>
     .custom-select {
         width: 100%;
@@ -14,9 +14,7 @@
         appearance: none;
         background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4H2z" fill="%23333"/></svg>') no-repeat left 10px center;
         direction: rtl;
-        /* Ensure RTL for Arabic text */
         text-align: center;
-        /* Align text to the right */
     }
     
     .custom-select:focus {

@@ -30,12 +30,12 @@
 
                     <div class="option-row">
                         <h3>{{ 'home.outbound_time' | translate }}</h3>
-                        <app-trip-time (tripTimeOutSelected)="onOutboundTimeSelected($event)"></app-trip-time>
+                        <app-trip-time [isDisabled]="isOutboundTimeDisabled" (tripTimeOutSelected)="onOutboundTimeSelected($event)"></app-trip-time>
                     </div>
 
                     <div class="option-row">
                         <h3>{{ 'home.return_time' | translate }}</h3>
-                        <app-trip-time-return (tripTimeReturnSelected)="onReturnTimeSelected($event)"></app-trip-time-return>
+                        <app-trip-time-return [isDisabled]="isReturnTimeDisabled" (tripTimeReturnSelected)="onReturnTimeSelected($event)"></app-trip-time-return>
                     </div>
 
                     <div class="option-row">

@@ -1,21 +1,22 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Trip_Time_Return } from './model/trip-time-return.model';
 import { TripTimeReturnService } from './service/trip-time-return.service';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core'; // Add this import
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-trip-time-return',
-  imports: [NgFor, CommonModule, FormsModule, TranslateModule], // Add TranslateModule
+  imports: [NgFor, CommonModule, FormsModule, TranslateModule],
   templateUrl: './trip-time-return.component.html',
   styleUrl: './trip-time-return.component.scss'
 })
 export class TripTimeReturnComponent {
   tripTimesReturns: Trip_Time_Return[] = [];
+  @Output() tripTimeReturnSelected = new EventEmitter<number>();
+  @Input() isDisabled: boolean = true;
   
   constructor(private tripTimeReturnService: TripTimeReturnService) {}
-  @Output() tripTimeReturnSelected = new EventEmitter<number>();
   
   ngOnInit() {
     this.tripTimeReturnService.getTripTimeReturn().subscribe({

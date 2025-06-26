@@ -49,8 +49,8 @@ export class RegisterComponent {
       gender: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       fatherName: ['', Validators.required],
-      phoneNumber1: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      phoneNumber2: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]]
+      phoneNumber1: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]],
+      phoneNumber2: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]]
     });
   }
 
