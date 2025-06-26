@@ -1,5 +1,5 @@
 <select (change)="onSelect($event)">
-    <option value="">Select a trip place</option>
+    <option value="">{{ 'trip_outbound_time.select.select' | translate }}</option>
     <option *ngFor="let tripTimesOut of tripTimesOuts" [value]="tripTimesOut.id">
       {{ tripTimesOut.timeRange }}
     </option>

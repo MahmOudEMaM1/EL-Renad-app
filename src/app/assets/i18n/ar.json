@@ -62,5 +62,8 @@
     "register.error": "فشل التسجيل. يرجى المحاولة مرة أخرى.",
     "trip_place.select": "اختر مكان الرحلة",
     "trip_price.select": "اختر سعر التذكرة",
+    "trip_outbound_time.select": "اختر وقت الذهاب",
+    "trip_return_time.select": "اختر وقت العودة",
+    "trip_type.select": "اختر نوع الرحله ",
     "language.select": "اختر اللغة"
 }
