@@ -7,22 +7,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { TripService } from './services/trip.service';
 import { Trip_Type } from './models/tribType.model';
 import { FormsModule } from '@angular/forms';
-
-
+import { TranslateModule } from '@ngx-translate/core'; // Add this import
 
 @Component({
   selector: 'app-trips',
-  imports: [NgFor, CommonModule, FormsModule],
+  imports: [NgFor, CommonModule, FormsModule, TranslateModule], // Add TranslateModule
   standalone: true,
   templateUrl: './trips.component.html',
   styleUrl: './trips.component.scss'
 })
-export class TripsComponent implements OnInit{
-  tripTypes: Trip_Type[] = []; // Add this property
-
+export class TripsComponent implements OnInit {
+  tripTypes: Trip_Type[] = [];
+  
   constructor(private tripTypesService: TripService) {}
   @Output() tripTypeSelected = new EventEmitter<number>();
-
+  
   ngOnInit() {
     this.tripTypesService.getTrips().subscribe({
       next: (data) => {
@@ -33,7 +32,7 @@ export class TripsComponent implements OnInit{
       }
     });
   }
-
+  
   onSelect(event: Event): void {
     const select = event.target as HTMLSelectElement;
     const tripTypeId = Number(select.value);

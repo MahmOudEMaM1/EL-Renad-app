@@ -37,12 +37,213 @@ mat-toolbar::after {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 1px;
+    height: 2px;
     /* Thickness of the black line */
     background-color: #000000;
     /* Black line */
     z-index: 99;
     /* Below content but above background */
+}
+
+
+/* Style the main card with modern look */
+
+mat-card {
+    border-radius: 15px;
+    /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow */
+    background: rgba(255, 255, 255, 0.9);
+    /* Slight transparency */
+    padding: 20px;
+    transition: transform 0.3s ease;
+    /* Smooth hover effect */
+    &:hover {
+        transform: scale(1.01);
+        /* Slight scale on hover */
+    }
+}
+
+mat-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.trip-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    /* Limit width for better centering */
+}
+
+.option-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    /* Center align labels and dropdowns */
+}
+
+h3 {
+    margin: 0;
+    color: #3f51b5;
+    font-weight: 500;
+    font-size: 1.2em;
+    /* Larger and modern font size */
+}
+
+
+/* Modern styling for dropdown lists */
+
+::ng-deep .mat-select {
+    border-radius: 12px;
+    /* Enhanced rounded corners */
+    background: #ffffff;
+    /* Clean white background */
+    border: 2px solid #e0e0e0;
+    /* Subtle modern border */
+    padding: 12px 16px;
+    /* Increased padding for a spacious feel */
+    font-size: 1.1em;
+    /* Larger text */
+    color: #333;
+    /* Darker text for readability */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Modern shadow */
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    width: 100%;
+    /* Full width within option-row */
+    appearance: none;
+    /* Remove default arrow */
+    background-image: linear-gradient(45deg, transparent 50%, #666 50%), linear-gradient(135deg, #666 50%, transparent 50%);
+    /* Custom arrow */
+    background-position: calc(100% - 20px) center, calc(100% - 15px) center;
+    /* Position arrows */
+    background-size: 8px 8px, 8px 8px;
+    /* Arrow size */
+    background-repeat: no-repeat;
+    cursor: pointer;
+    &:focus-within {
+        border-color: #3f51b5;
+        /* Highlight border on focus */
+        box-shadow: 0 6px 15px rgba(63, 81, 181, 0.2);
+        /* Enhanced shadow on focus */
+        outline: none;
+        /* Remove default outline */
+    }
+    &:hover {
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        /* Subtle hover effect */
+    }
+}
+
+::ng-deep .mat-select-trigger {
+    padding: 0;
+    /* Remove default padding to customize */
+}
+
+::ng-deep .mat-select-panel {
+    border-radius: 12px;
+    /* Match dropdown panel corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    /* Deeper shadow for panel */
+    background: #fff;
+    /* White background */
+    min-width: 200px;
+    /* Ensure minimum width */
+    animation: slideDown 0.2s ease-out;
+    /* Slide-down animation */
+}
+
+::ng-deep .mat-option {
+    font-size: 1.1em;
+    /* Larger option text */
+    padding: 12px 16px;
+    /* More padding */
+    color: #444;
+    /* Slightly darker text */
+    transition: background 0.2s ease;
+    /* Smooth background transition */
+    &:hover,
+    &.mat-active {
+        background: #f5f5f5;
+        /* Light gray hover/active background */
+    }
+    &:focus {
+        outline: none;
+        /* Remove default focus outline */
+    }
+}
+
+
+/* Animation for dropdown panel */
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Button styling */
+
+.register-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button[mat-raised-button] {
+    padding: 12px 24px;
+    /* Larger padding */
+    font-size: 1.2em;
+    /* Larger text */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    /* Modern shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transitions */
+    &:hover {
+        transform: translateY(-2px);
+        /* Lift effect */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        /* Enhanced shadow on hover */
+    }
+}
+
+
+/* Ensure RTL support for Arabic */
+
+[dir="rtl"] {
+    text-align: right;
+    mat-toolbar {
+        flex-direction: row-reverse;
+    }
+    .logo-title-container {
+        flex-direction: row-reverse;
+    }
+    .spacer {
+        margin-left: 0;
+        margin-right: auto;
+    }
+    .mat-form-field {
+        text-align: right;
+    }
+    .trip-options .option-row {
+        text-align: right;
+    }
 }
 
 
@@ -71,79 +272,4 @@ mat-toolbar::after {
 
 .spacer {
     flex: 1 1 auto;
-}
-
-.trip-options {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 30px;
-    @media (max-width: 768px) {
-        gap: 10px;
-        margin-bottom: 15px;
-    }
-}
-
-.option-row {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.option-row input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-h3 {
-    margin-bottom: 0;
-    color: #3f51b5;
-    font-weight: 500;
-}
-
-.register-button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-button {
-    min-width: 180px;
-}
-
-button[mat-raised-button] {
-    padding: 8px 24px;
-    font-size: 16px;
-}
-
-
-/* Ensure RTL support for Arabic */
-
-[dir="rtl"] {
-    text-align: right;
-    mat-toolbar {
-        flex-direction: row-reverse;
-    }
-    .logo-title-container {
-        flex-direction: row-reverse;
-    }
-    .spacer {
-        margin-left: 0;
-        margin-right: auto;
-    }
-    .mat-form-field {
-        text-align: right;
-    }
-    .mat-table {
-        direction: rtl;
-    }
-    .button-container,
-    .register-button-container {
-        flex-direction: row-reverse;
-    }
-    .trip-options .option-row {
-        text-align: right;
-    }
 }

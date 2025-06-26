@@ -5,7 +5,6 @@
             <span>{{ 'toolbar.title' | translate }}</span>
         </div>
         <span class="spacer"></span>
-        <span *ngIf="currentUser">{{ 'toolbar.welcome' | translate: {name: currentUser.name} }}</span>
         <app-language-toggle></app-language-toggle>
         <button mat-button (click)="logout()">{{ 'toolbar.logout' | translate }}</button>
     </mat-toolbar>

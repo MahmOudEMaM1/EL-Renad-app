@@ -24,8 +24,8 @@
                     </div>
 
                     <div class="option-row">
-                        <h3>{{ 'home.trip_price' | translate }}</h3>
-                        <app-trip-price (ticketPriceSelected)="onTicketPriceSelected($event)"></app-trip-price>
+                        <h3>{{ 'home.trip_type' | translate }}</h3>
+                        <app-trips (tripTypeSelected)="onTripTypeSelected($event)"></app-trips>
                     </div>
 
                     <div class="option-row">
@@ -39,8 +39,8 @@
                     </div>
 
                     <div class="option-row">
-                        <h3>{{ 'home.trip_type' | translate }}</h3>
-                        <app-trips (tripTypeSelected)="onTripTypeSelected($event)"></app-trips>
+                        <h3>{{ 'home.trip_price' | translate }}</h3>
+                        <app-trip-price (ticketPriceSelected)="onTicketPriceSelected($event)"></app-trip-price>
                     </div>
 
                     <div class="register-button-container">
