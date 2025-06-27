@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
   selectedTicketPrice: number | null = null;
   isPriceDisabled: boolean = false;
   isOutboundTimeDisabled: boolean = true;
-  isReturnTimeDisabled: boolean = true;
+  isReturnTimeDisabled:boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -84,17 +84,21 @@ export class HomeComponent implements OnInit {
       this.onTicketPriceSelected(2);
       this.isOutboundTimeDisabled = false;
       this.isReturnTimeDisabled = true;
+      this.selectedReturnTime = 9; // Set to "لا يوجد"
     } else if (tripTypeId === 2) { // "إياب"
       this.selectedTicketPrice = 2; // Special price id for 25
       this.isPriceDisabled = true;
       this.onTicketPriceSelected(2);
       this.isOutboundTimeDisabled = true;
       this.isReturnTimeDisabled = false;
+      this.selectedOutboundTime = 9; // Set to "لا يوجد"
     } else {
       this.selectedTicketPrice = null;
       this.isPriceDisabled = false;
       this.isOutboundTimeDisabled = true;
       this.isReturnTimeDisabled = true;
+      this.selectedOutboundTime = 9; // Set to "لا يوجد"
+      this.selectedReturnTime = 9; // Set to "لا يوجد"
     }
   }
 
@@ -115,21 +119,43 @@ export class HomeComponent implements OnInit {
   }
 
   registerTrip(): void {
-    if (!this.selectedTripType || !this.selectedTripPlace || 
-        !this.selectedOutboundTime || !this.selectedReturnTime || 
-        !this.selectedTicketPrice) {
+    if (!this.selectedTripType || !this.selectedTripPlace || !this.selectedTicketPrice) {
       this.snackBar.open(this.translate.instant('home.error_all_fields'), 'Close', {
         duration: 3000
       });
       return;
     }
 
+    // Conditional validation based on trip type
+    if (this.selectedTripType === 1) {
+      if (!this.selectedOutboundTime || !this.selectedReturnTime) {
+        this.snackBar.open(this.translate.instant('home.error_all_fields'), 'Close', {
+          duration: 3000
+        });
+        return;
+      }
+    } else if (this.selectedTripType === 2) {
+      if (!this.selectedReturnTime) {
+        this.snackBar.open(this.translate.instant('home.error_all_fields'), 'Close', {
+          duration: 3000
+        });
+        return;
+      }
+    } else if (this.selectedTripType === 3) {
+      if (!this.selectedOutboundTime) {
+        this.snackBar.open(this.translate.instant('home.error_all_fields'), 'Close', {
+          duration: 3000
+        });
+        return;
+      }
+    }
+
     const registrationData: RegistrationRequest = {
       username: this.currentUser?.name || '',
       tripTypeId: this.selectedTripType,
       tripPlaceId: this.selectedTripPlace,
-      outboundTripTimeId: this.selectedOutboundTime,
-      returnTripTimeId: this.selectedReturnTime,
+      outboundTripTimeId: this.selectedOutboundTime || 9,
+      returnTripTimeId: this.selectedReturnTime || 9,
       phoneNumber1: this.currentUser?.phoneNumber1?.toString() || '',
       phoneNumber2: this.currentUser?.phoneNumber2?.toString() || '',
       pay: true,

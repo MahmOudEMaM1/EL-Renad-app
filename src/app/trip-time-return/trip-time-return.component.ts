@@ -21,7 +21,8 @@ export class TripTimeReturnComponent {
   ngOnInit() {
     this.tripTimeReturnService.getTripTimeReturn().subscribe({
       next: (data) => {
-        this.tripTimesReturns = data;
+        // Filter out the "لا يوجد" option (id = 9)
+        this.tripTimesReturns = data.filter(time => time.id !== 9);
       },
       error: (err) => {
         console.error('Error fetching trip times:', err);
@@ -32,7 +33,7 @@ export class TripTimeReturnComponent {
   onSelect(event: Event): void {
     const select = event.target as HTMLSelectElement;
     const tripTimeOutId = Number(select.value);
-    if (tripTimeOutId) {
+    if (tripTimeOutId >= 0) {
       this.tripTimeReturnSelected.emit(tripTimeOutId);
     }
   }
