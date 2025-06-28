@@ -44,6 +44,7 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
+      identify: ['', Validators.required], 
       password: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(18), Validators.max(100)]],
       gender: ['', Validators.required],
@@ -57,8 +58,8 @@ export class RegisterComponent {
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.loading = true;
-      const { name, password, age, gender, email, fatherName, phoneNumber1, phoneNumber2 } = this.registerForm.value;
-      this.authService.register({ name, password, age, gender, email, fatherName, phoneNumber1, phoneNumber2 }).subscribe({
+      const { name,identify, password, age, gender, email, fatherName, phoneNumber1, phoneNumber2 } = this.registerForm.value;
+      this.authService.register({ name,  identify, password, age, gender, email, fatherName, phoneNumber1, phoneNumber2 }).subscribe({
         next: () => {
           this.router.navigate(['/login']);
           this.loading = false;

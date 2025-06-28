@@ -24,6 +24,20 @@
                         </mat-form-field>
 
                         <mat-form-field appearance="fill">
+                            <mat-label>{{ 'register.identify' | translate }}</mat-label>
+                            <input matInput formControlName="identify" required>
+                            <mat-error *ngIf="registerForm.get('identify')?.errors?.['required']">
+                                {{ 'register.identify_required' | translate }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{ 'register.father_name' | translate }}</mat-label>
+                            <input matInput formControlName="fatherName" required>
+                            <mat-error *ngIf="registerForm.get('fatherName')?.errors?.['required']">{{ 'register.father_name_required' | translate }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
                             <mat-label>{{ 'register.password' | translate }}</mat-label>
                             <input matInput type="password" formControlName="password" required>
                             <mat-error *ngIf="registerForm.get('password')?.errors?.['required']">{{ 'register.password_required' | translate }}</mat-error>
@@ -51,12 +65,6 @@
                             <input matInput type="email" formControlName="email" required>
                             <mat-error *ngIf="registerForm.get('email')?.errors?.['required']">{{ 'register.email_required' | translate }}</mat-error>
                             <mat-error *ngIf="registerForm.get('email')?.errors?.['email']">{{ 'register.email_invalid' | translate }}</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="fill">
-                            <mat-label>{{ 'register.father_name' | translate }}</mat-label>
-                            <input matInput formControlName="fatherName" required>
-                            <mat-error *ngIf="registerForm.get('fatherName')?.errors?.['required']">{{ 'register.father_name_required' | translate }}</mat-error>
                         </mat-form-field>
 
                         <mat-form-field appearance="fill">

@@ -34,6 +34,7 @@
     "login.title": "تسجيل الدخول",
     "login.username": "اسم المستخدم",
     "login.password": "كلمة المرور",
+    "login.identify_required": "رقم العضويه مطلوب",
     "login.username_required": "اسم المستخدم مطلوب",
     "login.password_required": "كلمة المرور مطلوبة",
     "login.button": "تسجيل الدخول",
@@ -53,6 +54,7 @@
     "register.email_invalid": "يرجى إدخال بريد إلكتروني صالح",
     "register.father_name": "اسم الأب",
     "register.father_name_required": "اسم الأب مطلوب",
+    "register.identify_required": "رقم الهويه مطلوب",
     "register.phone1": "رقم الهاتف 1",
     "register.phone2": "رقم الهاتف 2",
     "register.phone_required": "رقم الهاتف مطلوب",
@@ -65,5 +67,12 @@
     "trip_outbound_time.select": "اختر وقت الذهاب",
     "trip_return_time.select": "اختر وقت العودة",
     "trip_type.select": "اختر نوع الرحله ",
-    "language.select": "اختر اللغة"
+    "language.select": "اختر اللغة",
+    "filter_placeholder": "أدخل قيمة الفلتر",
+    "select_column": "اختر العمود",
+    "total_registrations": "إجمالي عدد التسجيلات",
+    "total_price": "إجمالي السعر",
+    "register.identify": "رقم الهويه",
+    "login.identify": "رقم الهويه"
+
 }

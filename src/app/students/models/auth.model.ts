@@ -1,11 +1,12 @@
 // students/models/auth.model.ts
 export interface LoginRequest {
-    name: string;
+    identify: string;  
     password: string;
   }
   
   export interface RegisterRequest {
     name: string;
+    identify: string;
     password: string;
     age: number;
     gender: string;
@@ -18,6 +19,7 @@ export interface LoginRequest {
   export interface AuthResponse {
     id: number;
     name: string;
+    identify: string;
     fatherName: string;
     age: number;
     gender: string;

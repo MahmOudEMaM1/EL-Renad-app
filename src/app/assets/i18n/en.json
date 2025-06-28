@@ -34,6 +34,7 @@
     "login.title": "Login",
     "login.username": "Username",
     "login.password": "Password",
+    "login.identify_required": "Identify is required",
     "login.username_required": "Username is required",
     "login.password_required": "Password is required",
     "login.button": "Login",
@@ -53,6 +54,7 @@
     "register.email_invalid": "Please enter a valid email",
     "register.father_name": "Father's Name",
     "register.father_name_required": "Father's name is required",
+    "register.identify_required": "Identify is required",
     "register.phone1": "Phone Number 1",
     "register.phone2": "Phone Number 2",
     "register.phone_required": "Phone number is required",
@@ -65,5 +67,11 @@
     "trip_outbound_time.select": "Select a outbound time of trip",
     "trip_return_time.select": "Select a return time of trip",
     "trip_type.select": "Select the trip type",
-    "language.select": "Select Language"
+    "language.select": "Select Language",
+    "filter_placeholder": "Enter filter value",
+    "select_column": "Select column",
+    "total_registrations": "Total Registrations",
+    "total_price": "Total Price",
+    "register.identify": "Identify Number",
+    "login.identify": "Identify Number"
 }

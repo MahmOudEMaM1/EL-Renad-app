@@ -20,6 +20,24 @@ body {
     background-color: transparent !important;
 }
 
+.filter-section {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.filter-select,
+.filter-input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filter-input {
+    flex-grow: 1;
+}
+
 .container {
     max-width: 1200px;
     /* Increased from 800px to allow more space */
@@ -27,7 +45,22 @@ body {
     padding: 0 20px;
     position: relative;
     z-index: 10;
+    padding: 20px;
     /* Lower than toolbar */
+}
+
+mat-toolbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    /* Thickness of the black line */
+    background-color: #000000;
+    /* Black line */
+    z-index: 99;
+    /* Below content but above background */
 }
 
 .loading,
@@ -49,7 +82,8 @@ th,
 td {
     padding: 15px;
     /* Increased padding from 10px */
-    text-align: left;
+    text-align: center;
+    /* Center-align table cell content */
     border-bottom: 2px solid #ddd;
     /* Thicker border */
 }
@@ -58,6 +92,8 @@ th {
     background-color: #f5f5f5;
     font-size: 1.3em;
     /* Larger header text */
+    text-align: center;
+    /* Center-align header content */
 }
 
 .paid {
@@ -80,6 +116,22 @@ button {
 }
 
 
+/* Toolbar actions styling */
+
+.toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Space between language toggle and logout button */
+}
+
+app-language-toggle {
+    padding: 5px 10px;
+    font-size: 1.1em;
+    /* Match button text size */
+}
+
+
 /* Ensure RTL support for Arabic */
 
 [dir="rtl"] {
@@ -92,7 +144,7 @@ button {
     }
     .spacer {
         margin-left: 0;
-        margin-right: auto;
+        margin-right: 0;
     }
     .mat-form-field {
         text-align: right;
@@ -101,6 +153,9 @@ button {
         direction: rtl;
     }
     .button-container {
+        flex-direction: row-reverse;
+    }
+    .toolbar-actions {
         flex-direction: row-reverse;
     }
 }
@@ -131,4 +186,10 @@ button {
 
 .spacer {
     flex: 1 1 auto;
+}
+
+.mat-footer-cell {
+    font-weight: bold;
+    background-color: #f5f5f5;
+    text-align: center;
 }

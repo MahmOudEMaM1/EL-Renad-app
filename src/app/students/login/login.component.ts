@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../services/auth.service';
 import { LanguageToggleComponent } from '../../language-toggle/language-toggle.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core'; // Add TranslateService
+import { identity } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +42,7 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      identify:['',Validators.required],
       password: ['', Validators.required]
     });
   }
