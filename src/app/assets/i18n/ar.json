@@ -73,6 +73,6 @@
     "total_registrations": "إجمالي عدد التسجيلات",
     "total_price": "إجمالي السعر",
     "register.identify": "رقم الهويه",
-    "login.identify": "رقم الهويه"
-
+    "login.identify": "رقم الهويه",
+    "dashboard.export_excel": "استخراج كملف اكسيل"
 }

@@ -73,5 +73,6 @@
     "total_registrations": "Total Registrations",
     "total_price": "Total Price",
     "register.identify": "Identify Number",
-    "login.identify": "Identify Number"
+    "login.identify": "Identify Number",
+    "dashboard.export_excel": "Export to Excel"
 }

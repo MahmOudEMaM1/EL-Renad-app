@@ -105,5 +105,11 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
         </table>
+        <div class="export-section" *ngIf="!loading && !error && dataSource.data.length > 0">
+            <button mat-raised-button color="primary" (click)="exportToExcel()">
+                <mat-icon>file_download</mat-icon>
+                {{ 'dashboard.export_excel' | translate }}
+            </button>
+        </div>
     </div>
 </body>

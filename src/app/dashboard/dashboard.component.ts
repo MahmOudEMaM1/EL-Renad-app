@@ -11,7 +11,8 @@ import { DashboardServiceService } from './servic/dashboard-service.service';
 import { LanguageToggleComponent } from '../language-toggle/language-toggle.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-
+import * as XLSX from 'xlsx';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     MatToolbarModule,
     LanguageToggleComponent,
     TranslateModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -147,5 +149,31 @@ export class DashboardComponent implements OnInit {
     const filteredData = this.dataSource.filteredData;
     this.totalRegistrations = filteredData.length;
     this.totalPrice = filteredData.reduce((sum, reg) => sum + (reg.tiketPrice?.price || 0), 0);
+  }
+
+  exportToExcel(): void {
+    // Prepare the data for export
+    const exportData = this.dataSource.filteredData.map(reg => ({
+      'Username': reg.username,
+      'Trip Type': reg.tripType?.type || '',
+      'Trip Place': reg.tripPlace?.name || '',
+      'Outbound Time': reg.outboundTripTime?.timeRange || '',
+      'Return Time': reg.returnTripTime?.timeRange || '',
+      'Phone Number 1': reg.phoneNumber1,
+      'Phone Number 2': reg.phoneNumber2,
+      'Payment Status': reg.pay ? this.translate.instant('dashboard.paid') : this.translate.instant('dashboard.unpaid'),
+      'Ticket Price': reg.tiketPrice?.price || 0
+    }));
+
+    // Create worksheet
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    
+    // Create workbook
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Registrations');
+    
+    // Generate Excel file and download
+    const fileName = `el-renad-registrations-${new Date().toISOString().split('T')[0]}.xlsx`;
+    XLSX.writeFile(workbook, fileName);
   }
 }
