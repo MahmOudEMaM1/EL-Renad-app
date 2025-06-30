@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // The splash screen is shown by default; navigation happens after splashComplete
+    // teset The splash screen is shown by default; navigation happens after splashComplete
   }
 
   onSplashComplete(completed: boolean): void {
