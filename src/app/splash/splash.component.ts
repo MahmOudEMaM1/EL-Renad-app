@@ -13,10 +13,10 @@ export class SplashComponent implements OnInit {
   
   // Define image paths
   image2Path = 'assets/image2.png';
-
+  
   ngOnInit(): void {
     setTimeout(() => {
       this.splashComplete.emit(true);
-    }, 3000);
+    }, 2000); // Reduced to 2 seconds
   }
 }
