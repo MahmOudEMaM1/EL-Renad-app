@@ -54,7 +54,7 @@
     "register.email_invalid": "يرجى إدخال بريد إلكتروني صالح",
     "register.father_name": "اسم الأب",
     "register.father_name_required": "اسم الأب مطلوب",
-    "register.identify_required": "رقم الهويه مطلوب",
+    "register.identify_required": "رقم العضويه مطلوب",
     "register.phone1": "رقم الهاتف 1",
     "register.phone2": "رقم الهاتف 2",
     "register.phone_required": "رقم الهاتف مطلوب",
@@ -72,7 +72,7 @@
     "select_column": "اختر العمود",
     "total_registrations": "إجمالي عدد التسجيلات",
     "total_price": "إجمالي السعر",
-    "register.identify": "رقم الهويه",
-    "login.identify": "رقم الهويه",
+    "register.identify": "رقم العضويه",
+    "login.identify": "رقم العضويه",
     "dashboard.export_excel": "استخراج كملف اكسيل"
 }
