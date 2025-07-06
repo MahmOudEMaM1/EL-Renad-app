@@ -152,6 +152,7 @@ export class HomeComponent implements OnInit {
 
     const registrationData: RegistrationRequest = {
       username: this.currentUser?.name || '',
+      identify: this.currentUser?.identify || '',
       tripTypeId: this.selectedTripType,
       tripPlaceId: this.selectedTripPlace,
       outboundTripTimeId: this.selectedOutboundTime || 9,

@@ -1,6 +1,7 @@
 // models/registration.model.ts
 export interface RegistrationRequest {
   username: string;
+  identify: string;
   tripTypeId: number;
   tripPlaceId: number;
   outboundTripTimeId: number;
