@@ -5,7 +5,9 @@
             <span class="toolbar-title">{{ 'toolbar.title' | translate }}</span>
         </div>
         <span class="spacer"></span>
-        <app-language-toggle></app-language-toggle>
+        <div class="toolbarTranslation">
+            <app-language-toggle></app-language-toggle>
+        </div>
         <button mat-button (click)="logout()">{{ 'toolbar.logout' | translate }}</button>
     </mat-toolbar>
 
