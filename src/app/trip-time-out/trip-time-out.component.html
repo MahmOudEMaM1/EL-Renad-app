@@ -1,6 +1,9 @@
 <select (change)="onSelect($event)" [disabled]="isDisabled" class="custom-select">
     <option value="">{{ 'trip_outbound_time.select' | translate }}</option>
-    <option *ngFor="let time of tripTimesOuts" [value]="time.id" class="option-item">
+    <option *ngFor="let time of tripTimesOuts" 
+            [value]="time.id" 
+            [disabled]="isTimeDisabled(time.id)"
+            class="option-item">
       {{ time.timeRange }}
     </option>
   </select>

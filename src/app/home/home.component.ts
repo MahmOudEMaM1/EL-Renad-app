@@ -17,6 +17,7 @@ import { RegistrationService } from './services/registration.service';
 import { RegistrationRequest } from './models/registration.model';
 import { LanguageToggleComponent } from '../language-toggle/language-toggle.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-home',
@@ -35,8 +36,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     TripTimeReturnComponent,
     TripsComponent,
     LanguageToggleComponent,
-    TranslateModule
-  ],
+    TranslateModule,
+    MatIconModule
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -49,6 +51,8 @@ export class HomeComponent implements OnInit {
   isPriceDisabled: boolean = false;
   isOutboundTimeDisabled: boolean = true;
   isReturnTimeDisabled:boolean = true;
+  currentTime: string = '';
+  private timer: any;
 
   constructor(
     private authService: AuthService,
@@ -58,7 +62,10 @@ export class HomeComponent implements OnInit {
     private translate: TranslateService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.updateCairoTime();
+    this.timer = setInterval(() => this.updateCairoTime(), 1000);
+  }
 
   get currentUser() {
     return this.authService.currentUserValue;
@@ -118,6 +125,18 @@ export class HomeComponent implements OnInit {
     this.selectedTicketPrice = priceId;
   }
 
+  private updateCairoTime(): void {
+    const options: Intl.DateTimeFormatOptions = {
+      timeZone: 'Africa/Cairo',
+      hour12: false,
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    };
+    
+    this.currentTime = new Date().toLocaleTimeString('en-EG', options);
+  }
+
   registerTrip(): void {
     if (!this.selectedTripType || !this.selectedTripPlace || !this.selectedTicketPrice) {
       this.snackBar.open(this.translate.instant('home.error_all_fields'), 'Close', {
@@ -175,5 +194,11 @@ export class HomeComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 }

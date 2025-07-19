@@ -16,6 +16,10 @@
             <mat-card-header>
                 <mat-card-title>{{ 'home.title' | translate: {name: currentUser?.name} }}</mat-card-title>
                 <mat-card-subtitle>{{ 'home.subtitle' | translate }}</mat-card-subtitle>
+                <div class="current-time">
+                    <mat-icon>schedule</mat-icon>
+                    {{ currentTime }}
+                </div>
             </mat-card-header>
 
             <mat-card-content>
