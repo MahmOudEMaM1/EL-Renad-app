@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
       const storedUser = localStorage.getItem('currentUser');
       if (storedUser) {
         const user = JSON.parse(storedUser);
-        if (user.admin) {
+        if (user.admin === 'admin') {
           this.router.navigate(['/dashboard']);
-        } else {
+        } else if (user.admin === 'user') {
           this.router.navigate(['/home']);
         }
       } else {

@@ -26,6 +26,6 @@ export interface LoginRequest {
     email: string;
     phoneNumber1: string; // Changed from number to string
     phoneNumber2: string; // Changed from number to string
-    admin: boolean;
+    admin: string;
     token: string;
   }
