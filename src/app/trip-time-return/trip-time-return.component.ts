@@ -50,6 +50,12 @@ export class TripTimeReturnComponent implements OnInit, OnDestroy {
     // Get current Cairo time
     const cairoTime = this.getCurrentCairoTime();
     
+    // Only apply disabling for PM hours (12:00 or later)
+    if (cairoTime.hour < 12) {
+      this.disabledTimeIds.clear();
+      return;
+    }
+    
     this.disabledTimeIds.clear();
     
     this.tripTimesReturns.forEach(time => {
@@ -59,12 +65,16 @@ export class TripTimeReturnComponent implements OnInit, OnDestroy {
         const hour = parseInt(timeParts[0], 10);
         const minute = parseInt(timeParts[1], 10) || 0;
         
-        // If current hour is one hour before and minutes are past threshold
-        if (cairoTime.hour === hour - 1 && cairoTime.minute > minute) {
+        // Convert both to minutes for easier comparison
+        const optionTimeInMinutes = hour * 60 + minute;
+        const currentTimeInMinutes = cairoTime.hour * 60 + cairoTime.minute;
+        
+        // If within 90 minutes (1:30) of the option time, disable
+        if (optionTimeInMinutes - currentTimeInMinutes <= 90 && optionTimeInMinutes - currentTimeInMinutes > 0) {
           this.disabledTimeIds.add(time.id);
         }
-        // If current hour is same or later than the option hour
-        else if (cairoTime.hour >= hour) {
+        // If current time is past the option time, disable
+        else if (currentTimeInMinutes >= optionTimeInMinutes) {
           this.disabledTimeIds.add(time.id);
         }
       }
@@ -88,7 +98,6 @@ export class TripTimeReturnComponent implements OnInit, OnDestroy {
     };
   }
   
-  // Make sure this is public
   public isTimeDisabled(timeId: number): boolean {
     return this.isDisabled || this.disabledTimeIds.has(timeId);
   }
