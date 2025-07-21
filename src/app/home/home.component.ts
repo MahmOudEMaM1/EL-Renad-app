@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,7 +17,7 @@ import { RegistrationService } from './services/registration.service';
 import { RegistrationRequest } from './models/registration.model';
 import { LanguageToggleComponent } from '../language-toggle/language-toggle.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MatIconModule } from "@angular/material/icon";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
@@ -38,11 +38,11 @@ import { MatIconModule } from "@angular/material/icon";
     LanguageToggleComponent,
     TranslateModule,
     MatIconModule
-],
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   selectedTripType: number | null = null;
   selectedTripPlace: number | null = null;
   selectedOutboundTime: number | null = null;
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   selectedTicketPrice: number | null = null;
   isPriceDisabled: boolean = false;
   isOutboundTimeDisabled: boolean = true;
-  isReturnTimeDisabled:boolean = true;
+  isReturnTimeDisabled: boolean = true;
   currentTime: string = '';
   private timer: any;
 
@@ -78,7 +78,6 @@ export class HomeComponent implements OnInit {
 
   onTripTypeSelected(tripTypeId: number): void {
     this.selectedTripType = tripTypeId;
-    // Automatically set price based on trip type and emit the selection
     if (tripTypeId === 1) { // "ذهاب و إياب"
       this.selectedTicketPrice = 1; // Default price id for 50
       this.isPriceDisabled = true;
@@ -145,7 +144,6 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    // Conditional validation based on trip type
     if (this.selectedTripType === 1) {
       if (!this.selectedOutboundTime || !this.selectedReturnTime) {
         this.snackBar.open(this.translate.instant('home.error_all_fields'), 'Close', {

@@ -1,4 +1,3 @@
-// services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
@@ -14,7 +13,6 @@ export class AuthService {
   public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {
-    // Load user from localStorage on startup
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       this.currentUserSubject.next(JSON.parse(storedUser));
@@ -25,10 +23,8 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap(user => {
-          // Store user details and token in local storage
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-          // Navigate based on admin status
           if (user.admin) {
             this.router.navigate(['/dashboard']);
           } else {
@@ -39,13 +35,24 @@ export class AuthService {
   }
 
   register(userData: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData)
+    const formData = new FormData();
+    formData.append('name', userData.name);
+    formData.append('identify', userData.identify);
+    formData.append('password', userData.password);
+    formData.append('fatherName', userData.fatherName);
+    formData.append('age', userData.age.toString());
+    formData.append('gender', userData.gender);
+    formData.append('email', userData.email);
+    formData.append('phoneNumber1', userData.phoneNumber1);
+    formData.append('phoneNumber2', userData.phoneNumber2);
+    formData.append('photo', userData.photo);
+
+
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, formData)
       .pipe(
         tap(user => {
-          // Store user details and token in local storage
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-          // Navigate based on admin status
           if (user.admin) {
             this.router.navigate(['/dashboard']);
           } else {

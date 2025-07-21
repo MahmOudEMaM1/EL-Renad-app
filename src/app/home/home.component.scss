@@ -282,7 +282,6 @@ button[mat-raised-button] {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-left: 300px;
     font-size: 1.1em;
     font-weight: 500;
     color: #3f51b5;
@@ -300,4 +299,43 @@ button[mat-raised-button] {
 [dir="rtl"] .current-time {
     direction: ltr; // Keep time format LTR in Arabic interface
     justify-content: flex-end;
+}
+
+
+/* Updated user photo styling for centered clear circle */
+
+.user-photo {
+    margin-bottom: 10px;
+    /* Space below photo before title */
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically within the container */
+    width: 60%;
+    /* Full width of mat-card-header for centering */
+}
+
+.profile-photo {
+    max-width: 120px;
+    /* Increased size for clarity */
+    max-height: 120px;
+    /* Increased size for clarity */
+    width: 120px;
+    /* Fixed width to ensure circular shape */
+    height: 120px;
+    /* Fixed height to ensure circular shape */
+    border-radius: 50%;
+    /* Ensures a perfect circle */
+    object-fit: cover;
+    /* Maintains aspect ratio and fills the circle */
+    image-rendering: -webkit-optimize-contrast;
+    /* Improves clarity on WebKit browsers */
+    -webkit-filter: blur(0);
+    /* Ensures no blur */
+    filter: blur(0);
+    /* Ensures no blur */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-right: 20%;
+    /* Subtle shadow for depth */
 }

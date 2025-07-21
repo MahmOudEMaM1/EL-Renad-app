@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { LanguageToggleComponent } from '../../language-toggle/language-toggle.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MatToolbarModule } from '@angular/material/toolbar'; // Added
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-register',
@@ -35,31 +35,54 @@ export class RegisterComponent {
   loading = false;
   error = '';
   image2Path = '../assets/image2.png';
+  selectedPhoto: File | null = null;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private translate: TranslateService // Optional, add if you plan to use it
+    private translate: TranslateService
   ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      identify: ['', Validators.required], 
+      identify: ['', Validators.required],
       password: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(18), Validators.max(100)]],
       gender: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       fatherName: ['', Validators.required],
       phoneNumber1: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]],
-      phoneNumber2: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]]
+      phoneNumber2: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]],
+      photo: [null]
     });
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        this.error = this.translate.instant('register.photo_size_error');
+        return;
+      }
+      if (!['image/jpeg', 'image/png'].includes(file.type)) {
+        this.error = this.translate.instant('register.photo_type_error');
+        return;
+      }
+      this.selectedPhoto = file;
+      this.registerForm.patchValue({ photo: this.selectedPhoto });
+    }
   }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.loading = true;
-      const { name,identify, password, age, gender, email, fatherName, phoneNumber1, phoneNumber2 } = this.registerForm.value;
-      this.authService.register({ name,  identify, password, age, gender, email, fatherName, phoneNumber1, phoneNumber2 }).subscribe({
+      const { name, identify, password, age, gender, email, fatherName, phoneNumber1, phoneNumber2, photo } = this.registerForm.value;
+      const registerData: any = { name, identify, password, age, gender, email, fatherName, phoneNumber1, phoneNumber2 };
+      if (this.selectedPhoto) {
+        registerData.photo = this.selectedPhoto;
+      }
+      this.authService.register(registerData).subscribe({
         next: () => {
           this.router.navigate(['/login']);
           this.loading = false;

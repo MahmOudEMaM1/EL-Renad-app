@@ -14,6 +14,10 @@
     <div class="container">
         <mat-card>
             <mat-card-header>
+                <!-- Centered user photo before the title -->
+                <div class="user-photo" *ngIf="currentUser?.photo">
+                    <img [src]="'data:image/jpeg;base64,' + currentUser?.photo" alt="User Photo" class="profile-photo">
+                </div>
                 <mat-card-title>{{ 'home.title' | translate: {name: currentUser?.name} }}</mat-card-title>
                 <mat-card-subtitle>{{ 'home.subtitle' | translate }}</mat-card-subtitle>
                 <div class="current-time">
