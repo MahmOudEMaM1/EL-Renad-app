@@ -9,8 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../services/auth.service';
 import { LanguageToggleComponent } from '../../language-toggle/language-toggle.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core'; // Add TranslateService
-import { identity } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +32,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   loading = false;
   error = '';
-  image2Path = '../assets/image2.png'; 
+  image2Path = '../assets/image2.png';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,31 +41,36 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      identify:['',Validators.required],
+      identify: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  // login.component.ts
-onSubmit(): void {
-  if (this.loginForm.invalid) {
-    return;
-  }
-  this.loading = true;
-  this.error = '';
-  
-  this.authService.login(this.loginForm.value)
-    .subscribe({
-      next: () => {
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.loading = true;
+    this.error = '';
+
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (user) => {
         this.loading = false;
+        // Navigate based on role after successful login
+        if (user.admin === 'admin') {
+          this.router.navigate(['/dashboard']);
+        } else if (user.admin === 'user') {
+          this.router.navigate(['/home']);
+        } else if (user.admin === 'student-supervisor') {
+          this.router.navigate(['/student-supervisor']);
+        }
       },
-      error: error => {
-        // Use translation key instead of hardcoded error
+      error: (error) => {
         this.error = error.error || 'login.error';
         this.loading = false;
       }
     });
-}
+  }
 
   goToRegister(): void {
     this.router.navigate(['/register']);

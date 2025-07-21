@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router } from '@angular/router';
 import { AuthService } from './students/services/auth.service';
 import { SplashComponent } from './splash/splash.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -21,22 +22,26 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // teset The splash screen is shown by default; navigation happens after splashComplete
+    // Subscribe to currentUser$ to handle navigation after login
+    this.authService.currentUser$.pipe(
+      filter(user => user !== null) // Only proceed when user data is available
+    ).subscribe(user => {
+      if (user.admin === 'admin') {
+        this.router.navigate(['/dashboard']);
+      } else if (user.admin === 'user') {
+        this.router.navigate(['/home']);
+      } else if (user.admin === 'student-supervisor') {
+        this.router.navigate(['/student-supervisor']);
+      }
+    });
   }
 
   onSplashComplete(completed: boolean): void {
     if (completed) {
       this.showSplash = false;
-      // Handle navigation based on stored user
-      const storedUser = localStorage.getItem('currentUser');
-      if (storedUser) {
-        const user = JSON.parse(storedUser);
-        if (user.admin === 'admin') {
-          this.router.navigate(['/dashboard']);
-        } else if (user.admin === 'user') {
-          this.router.navigate(['/home']);
-        }
-      } else {
+      // Initial navigation if no user is set yet
+      const storedUser = this.authService.currentUserValue;
+      if (!storedUser) {
         this.router.navigate(['/login']);
       }
     }

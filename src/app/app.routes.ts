@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './students/guards/auth.guard';
 import { AdminGuard } from './dashboard/guards/admin.guard';
+import { StudentSupervisorComponent } from './student-supervisor/student-supervisor.component';
+import { StudentSupervisorGuard } from './student-supervisor/guards/student-supervisor.guard';
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -13,5 +15,10 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'students', component: StudentListComponent, canActivate: [AuthGuard] },
+  { 
+    path: 'student-supervisor',
+    component: StudentSupervisorComponent,
+    canActivate: [AuthGuard, StudentSupervisorGuard] // Should come after AuthGuard
+  },
   { path: '**', redirectTo: '/login' }
 ];
