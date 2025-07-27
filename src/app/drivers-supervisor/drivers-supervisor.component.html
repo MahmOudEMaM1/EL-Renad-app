@@ -1,0 +1,154 @@
+<div class="container">
+    <mat-card *ngIf="!loading && !error" class="main-card">
+        <mat-card-header>
+            <h2>{{ 'driver_supervisor.title' | translate }}</h2>
+            <div class="header-actions">
+                <app-language-toggle></app-language-toggle>
+                <button mat-button (click)="logout()">
+                    <mat-icon>logout</mat-icon>
+                    {{ 'toolbar.logout' | translate }}
+                </button>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <!-- Outbound Trip Time Groups -->
+            <h3>{{ 'driver_supervisor.outbound' | translate }}</h3>
+            <div class="stats-grid">
+                <mat-card class="stats-card" *ngFor="let group of groupedOutbound | keyvalue">
+                    <mat-card-header>
+                        <mat-card-title>{{ group.key }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="trip-list">
+                            <div class="time-section">
+                                <div class="time-row">
+                                    <strong>{{ group.value.tripPlaceName }}</strong>
+                                </div>
+                            </div>
+                            <div class="count-badge">
+                                <mat-icon>people</mat-icon>
+                                <span>{{ group.value.usernameCount }} {{ 'driver_supervisor.students' | translate }}</span>
+                            </div>
+                            <div class="bus-allocation">
+                                <h4>{{ 'driver_supervisor.bus_allocation' | translate }}</h4>
+                                <div class="assignment-summary">
+                                    <div class="assigned">
+                                        <span>{{ 'driver_supervisor.assigned' | translate }}</span>
+                                        <strong>{{ service.getAssignedStudents(group.value) }}</strong>
+                                    </div>
+                                    <div class="remaining">
+                                        <span>{{ 'driver_supervisor.unassigned' | translate }}</span>
+                                        <strong>{{ service.getBusAllocation(group.value).remainingStudents }}</strong>
+                                    </div>
+                                </div>
+                                <div class="bus-list" *ngIf="service.getBusAllocation(group.value).buses.length > 0">
+                                    <div class="bus-item" *ngFor="let bus of service.getBusAllocation(group.value).buses">
+                                        <div class="bus-info">
+                                            <mat-icon>{{ bus.type === 'large' ? 'directions_bus' : 'airport_shuttle' }}</mat-icon>
+                                            <span class="bus-type">
+                                                {{ (bus.type === 'large' ? 'driver_supervisor.large_bus' : 'driver_supervisor.small_bus') | translate }}
+                                            </span>
+                                            <span class="bus-capacity" [class.full]="bus.assigned === bus.capacity">
+                                                {{ bus.assigned }}/{{ bus.capacity }}
+                                            </span>
+                                        </div>
+                                        <button mat-icon-button color="warn" (click)="removeBus(group.value, bus.id)" matTooltip="{{ 'driver_supervisor.remove' | translate }}">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="bus-actions">
+                                    <button mat-raised-button color="primary" (click)="addLargeBus(group.value)">
+                                        <mat-icon>directions_bus</mat-icon>
+                                        {{ 'driver_supervisor.add_large' | translate }}
+                                    </button>
+                                    <button mat-raised-button color="accent" (click)="addSmallBus(group.value)">
+                                        <mat-icon>airport_shuttle</mat-icon>
+                                        {{ 'driver_supervisor.add_small' | translate }}
+                                    </button>
+                                    <button mat-raised-button color="warn" (click)="optimizeAllocation(group.value)" *ngIf="service.getBusAllocation(group.value).buses.length > 0">
+                                        <mat-icon>optimize</mat-icon>
+                                        {{ 'driver_supervisor.optimize' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <!-- Return Trip Time Groups -->
+            <h3>{{ 'driver_supervisor.return' | translate }}</h3>
+            <div class="stats-grid">
+                <mat-card class="stats-card" *ngFor="let group of groupedReturn | keyvalue">
+                    <mat-card-header>
+                        <mat-card-title>{{ group.key }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="trip-list">
+                            <div class="time-section">
+                                <div class="time-row">
+                                    <strong>{{ group.value.tripPlaceName }}</strong>
+                                </div>
+                            </div>
+                            <div class="count-badge">
+                                <mat-icon>people</mat-icon>
+                                <span>{{ group.value.usernameCount }} {{ 'driver_supervisor.students' | translate }}</span>
+                            </div>
+                            <div class="bus-allocation">
+                                <h4>{{ 'driver_supervisor.bus_allocation' | translate }}</h4>
+                                <div class="assignment-summary">
+                                    <div class="assigned">
+                                        <span>{{ 'driver_supervisor.assigned' | translate }}</span>
+                                        <strong>{{ service.getAssignedStudents(group.value) }}</strong>
+                                    </div>
+                                    <div class="remaining">
+                                        <span>{{ 'driver_supervisor.unassigned' | translate }}</span>
+                                        <strong>{{ service.getBusAllocation(group.value).remainingStudents }}</strong>
+                                    </div>
+                                </div>
+                                <div class="bus-list" *ngIf="service.getBusAllocation(group.value).buses.length > 0">
+                                    <div class="bus-item" *ngFor="let bus of service.getBusAllocation(group.value).buses">
+                                        <div class="bus-info">
+                                            <mat-icon>{{ bus.type === 'large' ? 'directions_bus' : 'airport_shuttle' }}</mat-icon>
+                                            <span class="bus-type">
+                                                {{ (bus.type === 'large' ? 'driver_supervisor.large_bus' : 'driver_supervisor.small_bus') | translate }}
+                                            </span>
+                                            <span class="bus-capacity" [class.full]="bus.assigned === bus.capacity">
+                                                {{ bus.assigned }}/{{ bus.capacity }}
+                                            </span>
+                                        </div>
+                                        <button mat-icon-button color="warn" (click)="removeBus(group.value, bus.id)" matTooltip="{{ 'driver_supervisor.remove' | translate }}">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="bus-actions">
+                                    <button mat-raised-button color="primary" (click)="addLargeBus(group.value)">
+                                        <mat-icon>directions_bus</mat-icon>
+                                        {{ 'driver_supervisor.add_large' | translate }}
+                                    </button>
+                                    <button mat-raised-button color="accent" (click)="addSmallBus(group.value)">
+                                        <mat-icon>airport_shuttle</mat-icon>
+                                        {{ 'driver_supervisor.add_small' | translate }}
+                                    </button>
+                                    <button mat-raised-button color="warn" (click)="optimizeAllocation(group.value)" *ngIf="service.getBusAllocation(group.value).buses.length > 0">
+                                        <mat-icon>optimize</mat-icon>
+                                        {{ 'driver_supervisor.optimize' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="global-save-section">
+                <button mat-raised-button color="primary" (click)="saveAllAllocations()" class="save-all-button">
+                    <mat-icon>save</mat-icon>
+                    {{ 'driver_supervisor.save_allocations' | translate }}
+                </button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+</div>

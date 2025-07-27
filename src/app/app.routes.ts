@@ -8,6 +8,9 @@ import { AuthGuard } from './students/guards/auth.guard';
 import { AdminGuard } from './dashboard/guards/admin.guard';
 import { StudentSupervisorComponent } from './student-supervisor/student-supervisor.component';
 import { StudentSupervisorGuard } from './student-supervisor/guards/student-supervisor.guard';
+import { DriverSupervisorGuard } from './drivers-supervisor/guards/driver-supervisor.guard';
+import { DriversSupervisorComponent } from './drivers-supervisor/drivers-supervisor.component';
+import { BusAllocationComponent } from './dashboard/bus-allocation/bus-allocation.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -18,7 +21,13 @@ export const routes: Routes = [
   { 
     path: 'student-supervisor',
     component: StudentSupervisorComponent,
-    canActivate: [AuthGuard, StudentSupervisorGuard] // Should come after AuthGuard
+    canActivate: [AuthGuard, StudentSupervisorGuard] 
   },
+  { 
+    path: 'driver-supervisor', 
+    component:DriversSupervisorComponent,
+    canActivate: [DriverSupervisorGuard]
+  },
+  { path: 'bus-allocation', component: BusAllocationComponent, canActivate: [AdminGuard] },
   { path: '**', redirectTo: '/login' }
 ];

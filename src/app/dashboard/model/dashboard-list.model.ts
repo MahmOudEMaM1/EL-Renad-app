@@ -31,5 +31,6 @@ export interface Dashboard_List {
       id: number;
       name: string;
       price: number;
-    };
+    }
+    registrationDate: string;
   }

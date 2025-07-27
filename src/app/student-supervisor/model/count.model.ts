@@ -1,12 +1,9 @@
 // models/count.model.ts
 export interface TripCount {
-    tripTypeId: number;
-    tripTypeName: string;
-    tripPlaceId: number;
-    tripPlaceName: string;
-    outboundTripTimeId: number;
-    outboundTripTimeRange: string;
-    returnTripTimeId: number;
-    returnTripTimeRange: string;
-    usernameCount: number;
-  }
+  tripPlaceId: number;
+  tripPlaceName: string;
+  tripType: string; // Changed from tripTypeName
+  tripTimeId: number;
+  tripTimeRange: string; // Changed from outboundTripTimeRange/returnTripTimeRange
+  usernameCount: number;
+}

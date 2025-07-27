@@ -11,7 +11,7 @@ export class RegistrationService {
 
   constructor(private http: HttpClient) { }
 
-  registerTrip(registrationData: RegistrationRequest): Observable<RegistrationResponse> {
-    return this.http.post<RegistrationResponse>(this.apiUrl, registrationData);
+  registerTrips(registrations: RegistrationRequest[]): Observable<RegistrationResponse> {
+    return this.http.post<RegistrationResponse>(this.apiUrl, registrations);
   }
 }

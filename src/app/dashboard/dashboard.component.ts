@@ -4,7 +4,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../students/services/auth.service';
 import { Dashboard_List } from './model/dashboard-list.model';
 import { DashboardServiceService } from './servic/dashboard-service.service';
@@ -25,7 +25,8 @@ import { MatIconModule } from '@angular/material/icon';
     LanguageToggleComponent,
     TranslateModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -45,6 +46,7 @@ export class DashboardComponent implements OnInit {
     'phoneNumber2',
     'pay',
     'tiketPriceId',
+    'registrationDate',
     'actions'
   ];
 
@@ -139,6 +141,10 @@ export class DashboardComponent implements OnInit {
       case 'phoneNumber1': return data.phoneNumber1;
       case 'phoneNumber2': return data.phoneNumber2;
       case 'pay': return data.pay ? 'true' : 'false';
+      case 'registrationDate':
+        const date = new Date(data.registrationDate);
+        // Return formatted string for easy matching
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
       case 'tiketPriceId': return data.tiketPrice?.price;
       default: return '';
     }

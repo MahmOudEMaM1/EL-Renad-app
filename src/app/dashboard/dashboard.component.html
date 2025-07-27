@@ -9,6 +9,7 @@
             <div class="toolbarTranslation">
                 <app-language-toggle></app-language-toggle>
             </div>
+            <button mat-button [routerLink]="['/bus-allocation']">{{ 'dashboard.bus_allocation' | translate }}</button>
             <button mat-button (click)="logout()">{{ 'toolbar.logout' | translate }}</button>
         </div>
     </mat-toolbar>
@@ -17,17 +18,18 @@
         <h2>{{ 'dashboard.title' | translate }}</h2>
         <div class="filter-section">
             <select [(ngModel)]="filterColumn" (ngModelChange)="applyFilter()" class="filter-select">
-                <option value="">{{ 'select_column' | translate }}</option>
-                <option value="username">{{ 'dashboard.username' | translate }}</option>
-                <option value="tripTypeId">{{ 'dashboard.trip_type' | translate }}</option>
-                <option value="tripPlaceId">{{ 'dashboard.trip_place' | translate }}</option>
-                <option value="outboundTripTimeId">{{ 'dashboard.outbound_time' | translate }}</option>
-                <option value="returnTripTimeId">{{ 'dashboard.return_time' | translate }}</option>
-                <option value="phoneNumber1">{{ 'dashboard.phone1' | translate }}</option>
-                <option value="phoneNumber2">{{ 'dashboard.phone2' | translate }}</option>
-                <option value="pay">{{ 'dashboard.payment_status' | translate }}</option>
-                <option value="tiketPriceId">{{ 'dashboard.ticket_price' | translate }}</option>
-            </select>
+          <option value="">{{ 'select_column' | translate }}</option>
+          <option value="username">{{ 'dashboard.username' | translate }}</option>
+          <option value="tripTypeId">{{ 'dashboard.trip_type' | translate }}</option>
+          <option value="tripPlaceId">{{ 'dashboard.trip_place' | translate }}</option>
+          <option value="outboundTripTimeId">{{ 'dashboard.outbound_time' | translate }}</option>
+          <option value="returnTripTimeId">{{ 'dashboard.return_time' | translate }}</option>
+          <option value="phoneNumber1">{{ 'dashboard.phone1' | translate }}</option>
+          <option value="phoneNumber2">{{ 'dashboard.phone2' | translate }}</option>
+          <option value="pay">{{ 'dashboard.payment_status' | translate }}</option>
+          <option value="tiketPriceId">{{ 'dashboard.ticket_price' | translate }}</option>
+          <option value="registrationDate">{{ 'dashboard.registration_date' | translate }}</option>
+        </select>
             <input [(ngModel)]="filterValue" (ngModelChange)="applyFilter()" placeholder="{{ 'filter_placeholder' | translate }}" class="filter-input">
         </div>
         <div *ngIf="loading" class="loading">
@@ -79,9 +81,14 @@
                 <th mat-header-cell *matHeaderCellDef> {{ 'dashboard.payment_status' | translate }} </th>
                 <td mat-cell *matCellDef="let reg">
                     <span [ngClass]="{'paid': reg.pay, 'unpaid': !reg.pay}">
-                        {{ reg.pay ? ('dashboard.paid' | translate) : ('dashboard.unpaid' | translate) }}
-                    </span>
+              {{ reg.pay ? ('dashboard.paid' | translate) : ('dashboard.unpaid' | translate) }}
+            </span>
                 </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+            <ng-container matColumnDef="registrationDate">
+                <th mat-header-cell *matHeaderCellDef> {{ 'dashboard.registration_date' | translate }} </th>
+                <td mat-cell *matCellDef="let reg"> {{ reg.registrationDate | date:'medium' }} </td>
                 <td mat-footer-cell *matFooterCellDef></td>
             </ng-container>
             <ng-container matColumnDef="tiketPriceId">
@@ -95,11 +102,11 @@
                 <th mat-header-cell *matHeaderCellDef> {{ 'dashboard.actions' | translate }} </th>
                 <td mat-cell *matCellDef="let reg">
                     <button mat-button color="primary" *ngIf="!reg.pay" (click)="updatePaymentStatus(reg.id, true)">
-                        {{ 'dashboard.mark_paid' | translate }}
-                    </button>
+              {{ 'dashboard.mark_paid' | translate }}
+            </button>
                     <button mat-button color="warn" *ngIf="reg.pay" (click)="updatePaymentStatus(reg.id, false)">
-                        {{ 'dashboard.mark_unpaid' | translate }}
-                    </button>
+              {{ 'dashboard.mark_unpaid' | translate }}
+            </button>
                 </td>
                 <td mat-footer-cell *matFooterCellDef></td>
             </ng-container>
@@ -109,9 +116,9 @@
         </table>
         <div class="export-section" *ngIf="!loading && !error && dataSource.data.length > 0">
             <button mat-raised-button color="primary" (click)="exportToExcel()">
-                <mat-icon>file_download</mat-icon>
-                {{ 'dashboard.export_excel' | translate }}
-            </button>
+          <mat-icon>file_download</mat-icon>
+          {{ 'dashboard.export_excel' | translate }}
+        </button>
         </div>
     </div>
 </body>

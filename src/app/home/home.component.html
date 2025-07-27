@@ -53,6 +53,17 @@
                         <app-trip-price (ticketPriceSelected)="onTicketPriceSelected($event)" [isPriceDisabled]="isPriceDisabled" [selectedTicketPrice]="selectedTicketPrice"></app-trip-price>
                     </div>
 
+                    <div class="trip-counter-container">
+                        <button mat-icon-button color="primary" (click)="decrementCount()">
+                          <mat-icon>remove</mat-icon>
+                        </button>
+                        <span class="trip-count">{{ tripCount }}</span>
+                        <button mat-icon-button color="primary" (click)="incrementCount()">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                        <span class="trip-count-label">{{ 'home.trip_count' | translate }}</span>
+                    </div>
+
                     <div class="register-button-container">
                         <button mat-raised-button color="primary" (click)="registerTrip()">
                             {{ 'home.register_button' | translate }}

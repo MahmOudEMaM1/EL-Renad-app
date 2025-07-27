@@ -1,33 +1,61 @@
+<!-- student-supervisor.component.html -->
 <div class="container">
-    <mat-card *ngIf="!loading && !error">
+    <mat-card *ngIf="!loading && !error" class="main-card">
         <mat-card-header>
-            <h2>Trip Statistics</h2>
-            <button mat-button (click)="logout()">Logout</button>
+            <h2>{{ 'student_supervisor.title' | translate }}</h2>
+            <div class="header-actions">
+                <app-language-toggle></app-language-toggle>
+                <button class="logout-button" mat-button (click)="logout()">
+                    <mat-icon>logout</mat-icon>
+                    {{ 'toolbar.logout' | translate }}
+                </button>
+            </div>
         </mat-card-header>
 
         <mat-card-content>
+            <!-- Outbound Trips Section -->
+            <div class="section-title">ذهاب (Outbound)</div>
             <div class="stats-grid">
-                <mat-card class="stats-card" *ngFor="let count of counts">
+                <mat-card class="stats-card" *ngFor="let trip of outboundTrips">
                     <mat-card-header>
-                        <mat-card-title>{{ count.tripTypeName }}</mat-card-title>
-                        <mat-card-subtitle>{{ count.tripPlaceName }}</mat-card-subtitle>
+                        <mat-card-title>{{ trip.tripPlaceName }}</mat-card-title>
                     </mat-card-header>
 
                     <mat-card-content>
                         <div class="time-section">
                             <div class="time-row">
-                                <span>Outbound:</span>
-                                <strong>{{ count.outboundTripTimeRange }}</strong>
-                            </div>
-                            <div class="time-row">
-                                <span>Return:</span>
-                                <strong>{{ count.returnTripTimeRange }}</strong>
+                                <span>توقيت الرحلة:</span>
+                                <strong>{{ trip.tripTimeRange || 'لا يوجد' }}</strong>
                             </div>
                         </div>
 
                         <div class="count-badge">
                             <mat-icon>people</mat-icon>
-                            <span>{{ count.usernameCount }} Students</span>
+                            <span>{{ trip.usernameCount }} طالب</span>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <hr>
+            <!-- Return Trips Section -->
+            <div class="section-title">عودة (Return)</div>
+            <div class="stats-grid">
+                <mat-card class="stats-card" *ngFor="let trip of returnTrips">
+                    <mat-card-header>
+                        <mat-card-title>{{ trip.tripPlaceName }}</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <div class="time-section">
+                            <div class="time-row">
+                                <span>توقيت الرحلة:</span>
+                                <strong>{{ trip.tripTimeRange || 'لا يوجد' }}</strong>
+                            </div>
+                        </div>
+
+                        <div class="count-badge">
+                            <mat-icon>people</mat-icon>
+                            <span>{{ trip.usernameCount }} طالب</span>
                         </div>
                     </mat-card-content>
                 </mat-card>

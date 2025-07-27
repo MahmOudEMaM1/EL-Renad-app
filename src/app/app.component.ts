@@ -32,6 +32,8 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/home']);
       } else if (user.admin === 'student-supervisor') {
         this.router.navigate(['/student-supervisor']);
+      }else if (user.admin === 'driver-supervisor'){
+        this.router.navigate(['/driver-supervisor']);
       }
     });
   }

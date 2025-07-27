@@ -17,6 +17,6 @@ export class SplashComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.splashComplete.emit(true);
-    }, 2000); // Reduced to 2 seconds
+    }, 2000); 
   }
 }
